@@ -1,0 +1,58 @@
+[
+  {
+    "id": 1,
+    "name": "Racheal Makowa",
+    "year": null,
+    "faculty": null,
+    "genres": ["Poetry"],
+    "bio": "A lover of writing who uses it to express themselves fully, drawn to the guild by a deep appreciation for written art."
+  },
+  {
+    "id": 2,
+    "name": "Success Omoregie",
+    "year": null,
+    "faculty": null,
+    "genres": ["Content Writing", "Short Stories", "Fiction", "Poetry", "Other"],
+    "bio": "Believes writing is a healthy way of expressing emotions, observations, and passions, helping to find and inspire strength in hard times."
+  },
+  {
+    "id": 3,
+    "name": "Alexander Mshanga",
+    "year": null,
+    "faculty": null,
+    "genres": ["Content Writing", "Poetry"],
+    "bio": "Enjoys expressing the ideas that go around in their head and loves sharing their art with people."
+  },
+  {
+    "id": 4,
+    "name": "Juliana Paul",
+    "year": null,
+    "faculty": null,
+    "genres": ["Poetry"],
+    "bio": "Draws inspiration from life experiences and seeks a fantastic way to connect with other writers."
+  },
+  {
+    "id": 5,
+    "name": "Desire Kabota",
+    "year": null,
+    "faculty": null,
+    "genres": ["Poetry"],
+    "bio": "Finds writing to be a unique form of expression that mere speaking lacks, driven by a love for written art."
+  },
+  {
+    "id": 6,
+    "name": "Fraha Zabweka Manda",
+    "year": null,
+    "faculty": null,
+    "genres": ["Poetry"],
+    "bio": "Views writing as a safe outlet to express thoughts without fear of judgment, driven by a love for written art."
+  },
+  {
+    "id": 7,
+    "name": "Dickson Dzinjalamala",
+    "year": null,
+    "faculty": null,
+    "genres": ["Poetry"],
+    "bio": "Finds writing to be a powerful form of expression and joined the guild to share their art with others."
+  }
+]

@@ -1,0 +1,272 @@
+/* ============================================
+   MUST Writers Guild — Animations
+   ============================================ */
+
+/* Float Animation */
+@keyframes float {
+    0%, 100% { transform: translateY(0px); }
+    50% { transform: translateY(-15px); }
+}
+
+/* Bounce Animation */
+@keyframes bounce {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-8px); }
+}
+
+/* Subtle Bouncy Pulse Animation */
+@keyframes bouncyPulse {
+    0% {
+        transform: scale(1) translateY(0);
+    }
+    25% {
+        transform: scale(0.98) translateY(-12px);
+    }
+    50% {
+        transform: scale(1.02) translateY(-18px);
+    }
+    75% {
+        transform: scale(0.99) translateY(-4px);
+    }
+    100% {
+        transform: scale(1) translateY(0);
+    }
+}
+
+/* Fade In Up */
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Fade In */
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+/* Slide In Right */
+@keyframes slideInRight {
+    from {
+        opacity: 0;
+        transform: translateX(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+/* Slide In Left */
+@keyframes slideInLeft {
+    from {
+        opacity: 0;
+        transform: translateX(-30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+/* Scale In */
+@keyframes scaleIn {
+    from {
+        opacity: 0;
+        transform: scale(0.9);
+    }
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+/* Pulse */
+@keyframes pulse {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.05); }
+}
+
+/* Hero Text Sweep and Fade - Continuous */
+@keyframes heroTextFlow {
+    0% {
+        opacity: 0;
+        transform: translateX(-50px);
+    }
+    5% {
+        opacity: 1;
+        transform: translateX(0);
+    }
+    50% {
+        opacity: 1;
+        transform: translateX(0);
+    }
+    95% {
+        opacity: 0;
+        transform: translateX(50px);
+    }
+    100% {
+        opacity: 0;
+        transform: translateX(50px);
+    }
+}
+
+/* Ink Drop */
+@keyframes inkDrop {
+    0% {
+        transform: scale(0);
+        opacity: 0.8;
+    }
+    100% {
+        transform: scale(4);
+        opacity: 0;
+    }
+}
+
+/* Shimmer */
+@keyframes shimmer {
+    0% { background-position: -200% 0; }
+    100% { background-position: 200% 0; }
+}
+
+/* Staggered Entry */
+.stagger-1 { animation: fadeInUp 0.5s ease 0.1s both; }
+.stagger-2 { animation: fadeInUp 0.5s ease 0.2s both; }
+.stagger-3 { animation: fadeInUp 0.5s ease 0.3s both; }
+.stagger-4 { animation: fadeInUp 0.5s ease 0.4s both; }
+.stagger-5 { animation: fadeInUp 0.5s ease 0.5s both; }
+
+/* Page Transitions */
+.page-transition {
+    animation: fadeIn 0.4s ease;
+}
+
+/* Card Hover Effect */
+.card-hover {
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.card-hover:hover {
+    transform: translateY(-4px);
+    box-shadow: var(--shadow-medium);
+}
+
+/* Button Ripple Effect */
+.ripple {
+    position: relative;
+    overflow: hidden;
+}
+
+.ripple::after {
+    content: '';
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    pointer-events: none;
+    background-image: radial-gradient(circle, rgba(255,255,255,0.3) 10%, transparent 10.01%);
+    background-repeat: no-repeat;
+    background-position: 50%;
+    transform: scale(10, 10);
+    opacity: 0;
+    transition: transform 0.5s, opacity 0.5s;
+}
+
+.ripple:active::after {
+    transform: scale(0, 0);
+    opacity: 0.3;
+    transition: 0s;
+}
+
+/* Loading Skeleton */
+.skeleton {
+    background: linear-gradient(90deg, var(--border-light) 25%, var(--light-bg) 50%, var(--border-light) 75%);
+    background-size: 200% 100%;
+    animation: shimmer 1.5s infinite;
+    border-radius: var(--radius-sm);
+}
+
+/* Smooth Theme Transition */
+body, .card, .content-card, .story-card, .poem-card, 
+.event-card, .benefit-card, .member-card, .leadership-card,
+.accordion-item, .modal, .bottom-nav, .search-bar input,
+.form-group input, .form-group select, .form-group textarea,
+.reader-controls, .bookmark-btn, .back-btn, .dark-mode-toggle {
+    transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+/* Entrance Animations */
+.animate-on-scroll {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.6s ease, transform 0.6s ease;
+}
+
+.animate-on-scroll.visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* Decorative Floating Elements */
+.floating-decor {
+    position: absolute;
+    opacity: 0.05;
+    pointer-events: none;
+    animation: float 6s ease-in-out infinite;
+}
+
+.floating-decor:nth-child(2) { animation-delay: 1s; }
+.floating-decor:nth-child(3) { animation-delay: 2s; }
+.floating-decor:nth-child(4) { animation-delay: 3s; }
+
+/* Ink Splash Animation */
+.ink-splash {
+    position: relative;
+}
+
+.ink-splash::before {
+    content: '';
+    position: absolute;
+    width: 20px;
+    height: 20px;
+    background: var(--primary-blue);
+    border-radius: 50%;
+    opacity: 0;
+    animation: inkDrop 0.6s ease-out;
+}
+
+/* Page Load Animation */
+.page-load {
+    animation: fadeInUp 0.5s ease;
+}
+
+/* Success Checkmark */
+@keyframes checkmark {
+    0% { transform: scale(0); }
+    50% { transform: scale(1.2); }
+    100% { transform: scale(1); }
+}
+
+.checkmark-animate {
+    animation: checkmark 0.5s ease;
+}
+
+/* Typing Indicator */
+@keyframes typing {
+    0%, 100% { opacity: 0.3; }
+    50% { opacity: 1; }
+}
+
+.typing-dot {
+    animation: typing 1.4s infinite;
+}
+
+.typing-dot:nth-child(2) { animation-delay: 0.2s; }
+.typing-dot:nth-child(3) { animation-delay: 0.4s; }

@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="theme-color" content="#141F3B">
+    <meta name="description" content="Read stories and poetry from the MUST Writers Guild.">
+    <title>Reader — MUST Writers Guild</title>
+    
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/components.css">
+    <link rel="stylesheet" href="css/animations.css">
+    <link rel="stylesheet" href="css/reader.css">
+    
+    <link rel="manifest" href="manifest.json">
+    <link rel="apple-touch-icon" href="assets/logo.png">
+</head>
+<body class="reader-page page-transition font-size-medium">
+    <!-- Reading Progress -->
+    <div class="reading-progress" id="readingProgress" style="width: 0%"></div>
+    
+    <!-- Back Button -->
+    <button class="back-btn" onclick="history.back()" aria-label="Go back">
+        <i class="bi bi-arrow-left"></i>
+    </button>
+    
+    <!-- Dark Mode Toggle -->
+    <button class="dark-mode-toggle" id="darkModeToggle" aria-label="Toggle dark mode">
+        <i class="bi bi-moon-fill"></i>
+    </button>
+    
+    <!-- Bookmark Button -->
+    <button class="bookmark-btn" id="bookmarkBtn" aria-label="Bookmark">
+        <i class="bi bi-bookmark"></i>
+    </button>
+    
+    <!-- Reader Header -->
+    <div class="reader-header" id="readerHeader">
+        <h1 id="readerTitle">Loading...</h1>
+        <p class="author" id="readerAuthor"></p>
+        <div class="meta" id="readerMeta"></div>
+    </div>
+    
+    <!-- Reader Content -->
+    <div class="reader-content" id="readerContent">
+        <div class="spinner"></div>
+    </div>
+    
+    <!-- Reading Time Estimate -->
+    <div class="reading-time-estimate" id="readingTime"></div>
+    
+    <!-- End Marker -->
+    <div class="end-marker" id="endMarker" style="display: none;">END</div>
+    
+    <!-- Reader Controls -->
+    <div class="reader-controls" id="readerControls">
+        <button onclick="changeFontSize(-1)" aria-label="Decrease font size">
+            <i class="bi bi-fonts"></i>
+            <span style="font-size: 0.7rem;">A-</span>
+        </button>
+        <button onclick="toggleDarkMode()" aria-label="Toggle dark mode">
+            <i class="bi bi-moon-fill"></i>
+        </button>
+        <button onclick="changeFontSize(1)" aria-label="Increase font size">
+            <i class="bi bi-fonts"></i>
+            <span style="font-size: 0.9rem;">A+</span>
+        </button>
+        <button onclick="toggleFocusMode()" aria-label="Toggle focus mode">
+            <i class="bi bi-eye"></i>
+        </button>
+    </div>
+    
+    <!-- Scripts -->
+    <script src="js/storage.js"></script>
+    <script src="js/app.js"></script>
+    <script src="js/reader.js"></script>
+    
+    <script>
+        // Get URL parameters
+        const params = new URLSearchParams(window.location.search);
+        const contentType = params.get('type') || 'story';
+        const contentId = parseInt(params.get('id')) || 1;
+        
+        let currentContent = null;
+        let fontSizeLevel = 1; // 0: small, 1: medium, 2: large
+        
+        async function loadContent() {
+            try {
+                // Handle plural form correctly: 'story' -> 'stories', 'poem' -> 'poems'
+                const pluralType = contentType === 'story' ? 'stories' : contentType === 'poem' ? 'poems' : `${contentType}s`;
+                const response = await fetch(`/data/${pluralType}.json`);
+                if (!response.ok) {
+                    throw new Error(`HTTP error! status: ${response.status}`);
+                }
+                const items = await response.json();
+                currentContent = items.find(item => item.id === contentId);
+                
+                if (!currentContent) {
+                    throw new Error('Content not found');
+                }
+                
+                renderContent();
+                checkBookmark();
+                restorePosition();
+            } catch (error) {
+                console.error('Error loading content:', error);
+                document.getElementById('readerContent').innerHTML = `
+                    <div class="empty-state">
+                        <i class="bi bi-exclamation-circle"></i>
+                        <h3>Content not found</h3>
+                        <p>Unable to load this ${contentType}</p>
+                    </div>
+                `;
+            }
+        }
+        
+        function renderContent() {
+            const title = document.getElementById('readerTitle');
+            const author = document.getElementById('readerAuthor');
+            const meta = document.getElementById('readerMeta');
+            const content = document.getElementById('readerContent');
+            
+            if (contentType === 'story') {
+                title.textContent = currentContent.title;
+                author.textContent = `by ${currentContent.author}`;
+                meta.innerHTML = `
+                    <span><i class="bi bi-tag"></i> ${currentContent.genre}</span>
+                    <span><i class="bi bi-clock"></i> ${currentContent.readTime}</span>
+                    <span><i class="bi bi-calendar"></i> ${currentContent.date}</span>
+                `;
+                
+                content.className = 'reader-content story';
+                content.innerHTML = currentContent.content
+                    .split('\n\n')
+                    .map(para => `<p>${para}</p>`)
+                    .join('');
+                
+                document.getElementById('readingTime').textContent = 
+                    `Estimated reading time: ${currentContent.readTime}`;
+            } else {
+                title.textContent = currentContent.title;
+                title.className = 'poem-title';
+                author.textContent = `by ${currentContent.poet}`;
+                meta.innerHTML = `
+                    <span><i class="bi bi-flower1"></i> ${currentContent.theme}</span>
+                    <span><i class="bi bi-calendar"></i> ${currentContent.date}</span>
+                `;
+                
+                content.className = 'reader-content poem';
+                
+                // Preserve line breaks for poetry
+                const lines = currentContent.content.split('\n');
+                let html = '';
+                let currentStanza = [];
+                
+                lines.forEach(line => {
+                    if (line.trim() === '') {
+                        if (currentStanza.length > 0) {
+                            html += `<div class="stanza">${currentStanza.map(l => 
+                                `<span class="line">${l || '&nbsp;'}</span>`
+                            ).join('')}</div>`;
+                            currentStanza = [];
+                        }
+                    } else {
+                        currentStanza.push(line);
+                    }
+                });
+                
+                if (currentStanza.length > 0) {
+                    html += `<div class="stanza">${currentStanza.map(l => 
+                        `<span class="line">${l}</span>`
+                    ).join('')}</div>`;
+                }
+                
+                content.innerHTML = html;
+                document.getElementById('readingTime').textContent = '';
+            }
+            
+            document.getElementById('endMarker').style.display = 'block';
+            
+            // Setup scroll tracking
+            setupScrollTracking();
+        }
+        
+        function setupScrollTracking() {
+            const content = document.getElementById('readerContent');
+            const progress = document.getElementById('readingProgress');
+            
+            window.addEventListener('scroll', () => {
+                const scrollTop = window.scrollY;
+                const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+                const scrollPercent = (scrollTop / docHeight) * 100;
+                
+                progress.style.width = scrollPercent + '%';
+                
+                // Save position
+                savePosition(scrollTop);
+            });
+        }
+        
+        function changeFontSize(delta) {
+            fontSizeLevel = Math.max(0, Math.min(2, fontSizeLevel + delta));
+            const sizes = ['font-size-small', 'font-size-medium', 'font-size-large'];
+            
+            document.body.classList.remove('font-size-small', 'font-size-medium', 'font-size-large');
+            document.body.classList.add(sizes[fontSizeLevel]);
+            
+            // Save preference
+            localStorage.setItem('readerFontSize', fontSizeLevel);
+        }
+        
+        function toggleFocusMode() {
+            document.body.classList.toggle('focus-mode');
+        }
+        
+        function checkBookmark() {
+            const bookmarks = JSON.parse(localStorage.getItem('bookmarks') || '[]');
+            const isBookmarked = bookmarks.some(b => b.id === contentId && b.type === contentType);
+            
+            const btn = document.getElementById('bookmarkBtn');
+            const icon = btn.querySelector('i');
+            
+            if (isBookmarked) {
+                btn.classList.add('active');
+                icon.className = 'bi bi-bookmark-fill';
+            }
+            
+            // Remove existing listener to prevent stacking
+            btn.replaceWith(btn.cloneNode(true));
+            const newBtn = document.getElementById('bookmarkBtn');
+            
+            newBtn.addEventListener('click', () => {
+                const bookmarks = JSON.parse(localStorage.getItem('bookmarks') || '[]');
+                const index = bookmarks.findIndex(b => b.id === contentId && b.type === contentType);
+                const currentIcon = newBtn.querySelector('i');
+                
+                if (index > -1) {
+                    bookmarks.splice(index, 1);
+                    newBtn.classList.remove('active');
+                    currentIcon.className = 'bi bi-bookmark';
+                    showToast('Bookmark removed');
+                } else {
+                    bookmarks.push({
+                        id: contentId,
+                        type: contentType,
+                        title: currentContent.title,
+                        author: contentType === 'story' ? currentContent.author : currentContent.poet,
+                        date: new Date().toISOString()
+                    });
+                    newBtn.classList.add('active');
+                    currentIcon.className = 'bi bi-bookmark-fill';
+                    showToast('Bookmarked!');
+                }
+                
+                localStorage.setItem('bookmarks', JSON.stringify(bookmarks));
+            });
+        }
+        
+        function savePosition(position) {
+            const positions = JSON.parse(localStorage.getItem('readingPositions') || '{}');
+            positions[`${contentType}-${contentId}`] = {
+                position: position,
+                timestamp: new Date().toISOString()
+            };
+            localStorage.setItem('readingPositions', JSON.stringify(positions));
+        }
+        
+        function restorePosition() {
+            const positions = JSON.parse(localStorage.getItem('readingPositions') || '{}');
+            const saved = positions[`${contentType}-${contentId}`];
+            
+            if (saved && saved.position > 0) {
+                // Scroll to position after a short delay to ensure content is rendered
+                setTimeout(() => {
+                    window.scrollTo(0, saved.position);
+                }, 100);
+            }
+        }
+        
+        function showToast(message) {
+            const toast = document.createElement('div');
+            toast.style.cssText = `
+                position: fixed;
+                bottom: 100px;
+                left: 50%;
+                transform: translateX(-50%);
+                background: var(--deep-navy);
+                color: white;
+                padding: 12px 24px;
+                border-radius: 50px;
+                font-size: 0.9rem;
+                z-index: 3000;
+                animation: fadeInUp 0.3s ease;
+            `;
+            toast.textContent = message;
+            document.body.appendChild(toast);
+            
+            setTimeout(() => {
+                toast.style.animation = 'fadeIn 0.3s ease reverse';
+                setTimeout(() => toast.remove(), 300);
+            }, 2000);
+        }
+        
+        // Restore font size preference
+        const savedFontSize = localStorage.getItem('readerFontSize');
+        if (savedFontSize !== null) {
+            fontSizeLevel = parseInt(savedFontSize);
+            const sizes = ['font-size-small', 'font-size-medium', 'font-size-large'];
+            document.body.classList.add(sizes[fontSizeLevel]);
+        }
+        
+        // Initialize
+        loadContent();
+    </script>
+</body>
+</html>

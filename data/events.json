@@ -1,0 +1,22 @@
+[
+  {
+    "id": 1,
+    "title": "MUST Writers’ Guild Writing Competition",
+    "date": "2026-04-30",
+    "time": "08:00",
+    "venue": "Online via Google Form",
+    "description": "A short-format writing competition aimed at promoting creative expression and literary engagement among students. Features two categories: Poetry (max 14 lines) and Short Stories (1000-2000 words). Themes include Political Struggle, Deception, and University Campus Life.",
+    "attendees": "Open to all MUST students",
+    "category": "competition"
+  },
+  {
+    "id": 2,
+    "title": "MUST Writers Guild Book Launch",
+    "date": "2026-04-23",
+    "time": "14:00",
+    "venue": "MUST Library Auditorium",
+    "description": "A book launch event graced by guest of honor Mrs. Rhoda Zulu. The event featured storytelling, music, and poetry performances by guild members and invited guests. The launched book was auctioned and is available for purchase in hardcopy and soft copy formats.",
+    "attendees": "Guild members and invited guests",
+    "category": "launch"
+  }
+]

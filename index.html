@@ -1,0 +1,344 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="theme-color" content="#233D84">
+    <meta name="description" content="MUST Writers Guild - A community of storytellers, poets, dreamers, and creators at Malawi University of Science and Technology.">
+    <title>MUST Writers Guild</title>
+    
+    <!-- Bootstrap Icons -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    
+    <!-- CSS -->
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/components.css">
+    <link rel="stylesheet" href="css/animations.css">
+    
+    <!-- PWA -->
+    <link rel="manifest" href="manifest.json">
+    <link rel="apple-touch-icon" href="assets/logo.png">
+    
+    <style>
+        /* Home-specific decorative elements */
+        .home-bg {
+            position: fixed;
+            inset: 0;
+            pointer-events: none;
+            z-index: 0;
+            overflow: hidden;
+        }
+        
+        .home-bg .decor {
+            position: absolute;
+            opacity: 0.04;
+            color: var(--primary-blue);
+        }
+        
+        .home-bg .decor-1 {
+            top: 5%;
+            right: -30px;
+            font-size: 150px;
+            transform: rotate(15deg);
+        }
+        
+        .home-bg .decor-2 {
+            bottom: 15%;
+            left: -20px;
+            font-size: 120px;
+            transform: rotate(-20deg);
+        }
+        
+        .home-bg .decor-3 {
+            top: 50%;
+            left: 50%;
+            font-size: 80px;
+            transform: translate(-50%, -50%) rotate(45deg);
+        }
+        
+        .featured-section {
+            margin-top: 32px;
+        }
+        
+        .featured-section h2 {
+            font-size: 1.25rem;
+            margin-bottom: 16px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .featured-section h2 i {
+            color: var(--guild-green);
+        }
+        
+        .featured-card {
+            background: linear-gradient(135deg, var(--primary-blue), var(--deep-navy));
+            border-radius: var(--radius-lg);
+            padding: 24px;
+            color: white;
+            margin-bottom: 16px;
+            position: relative;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            min-height: 120px;
+            text-decoration: none;
+        }
+        
+        .featured-card::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, transparent 70%);
+            z-index: 0;
+            pointer-events: none;
+        }
+        
+        .featured-card h3 {
+            color: white !important;
+            font-size: 1.2rem;
+            margin-bottom: 8px;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .featured-card p {
+            color: rgba(255, 255, 255, 0.9) !important;
+            font-size: 0.9rem;
+            position: relative;
+            z-index: 1;
+            margin: 0;
+        }
+        
+        .featured-card .arrow {
+            position: absolute;
+            bottom: 20px;
+            right: 20px;
+            font-size: 1.5rem;
+            color: rgba(255,255,255,0.6);
+            z-index: 1;
+        }
+        
+        .stats-row {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 12px;
+            margin: 32px 0;
+        }
+        
+        .stat-item {
+            text-align: center;
+            padding: 16px;
+            background: var(--white);
+            border-radius: var(--radius-md);
+            box-shadow: var(--shadow-soft);
+            border: 1px solid var(--border-light);
+        }
+        
+        .stat-item .number {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--primary-blue);
+            display: block;
+        }
+        
+        .stat-item .label {
+            font-size: 0.75rem;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+        
+        /* Hero text animations */
+        .hero h1 {
+            animation: heroTextFlow 18s ease-in-out infinite;
+        }
+        
+        .hero .motto {
+            animation: heroTextFlow 18s ease-in-out infinite;
+            animation-delay: 0.2s;
+        }
+        
+        .hero > p {
+            animation: heroTextFlow 18s ease-in-out infinite;
+            animation-delay: 0.4s;
+        }
+    </style>
+</head>
+<body class="page-transition">
+    <!-- Dark Mode Toggle -->
+    <button class="dark-mode-toggle" id="darkModeToggle" aria-label="Toggle dark mode">
+        <i class="bi bi-moon-fill"></i>
+    </button>
+    
+    <!-- Decorative Background -->
+    <div class="home-bg">
+        <i class="bi bi-feather decor decor-1"></i>
+        <i class="bi bi-droplet decor decor-2"></i>
+        <i class="bi bi-pen decor decor-3"></i>
+    </div>
+    
+    <div class="container" style="position: relative; z-index: 1;">
+        <!-- Hero Section -->
+        <section class="hero">
+            <div class="hero-logo">
+                <img src="assets/logo.png" alt="MUST Writers Guild Logo" loading="eager">
+            </div>
+            
+            <h1>MUST Writers Guild</h1>
+            <p class="motto">Write. Share. Grow.</p>
+            <p>Welcome to the MUST Writers Guild, a community of storytellers, poets, dreamers, and creators. Discover stories, share your voice, and grow as a writer.</p>
+            
+            <div class="hero-buttons">
+                <a href="library.html" class="btn btn-primary btn-ink">
+                    <i class="bi bi-book-half"></i>
+                    Explore Library
+                </a>
+                <a href="join.html" class="btn btn-secondary">
+                    <i class="bi bi-person-plus"></i>
+                    Join Us
+                </a>
+            </div>
+        </section>
+        
+        <!-- Stats -->
+        <div class="stats-row">
+            <div class="stat-item stagger-1">
+                <span class="number" id="storyCount">50+</span>
+                <span class="label">Stories</span>
+            </div>
+            <div class="stat-item stagger-2">
+                <span class="number" id="memberCount">120+</span>
+                <span class="label">Members</span>
+            </div>
+            <div class="stat-item stagger-3">
+                <span class="number" id="eventCount">24</span>
+                <span class="label">Events</span>
+            </div>
+        </div>
+        
+        <!-- Featured Content -->
+        <section class="featured-section">
+            <h2><i class="bi bi-star-fill"></i> Featured This Week</h2>
+            
+            <a href="reader.html?type=story&id=4" class="featured-card">
+                <h3>Peace Within Justice</h3>
+                <p>by Daniel Kabango</p>
+                <span class="read-btn" style="position: relative; z-index: 1; display: inline-block; margin-top: 8px; padding: 8px 12px; background: rgba(255,255,255,0.2); border-radius: 4px; font-size: 0.85rem;">Read Now <i class="bi bi-arrow-right"></i></span>
+            </a>
+            
+            <a href="reader.html?type=story&id=5" class="featured-card" style="background: linear-gradient(135deg, var(--guild-green), #3a7a30);">
+                <h3>The Day the Sun Disappeared</h3>
+                <p>by Sekani Msachi</p>
+                <span class="read-btn" style="position: relative; z-index: 1; display: inline-block; margin-top: 8px; padding: 8px 12px; background: rgba(255,255,255,0.2); border-radius: 4px; font-size: 0.85rem;">Read Now <i class="bi bi-arrow-right"></i></span>
+            </a>
+        </section>
+        
+        <!-- Recent Additions -->
+        <section class="featured-section">
+            <h2><i class="bi bi-clock-history"></i> Fresh Ink</h2>
+            <div id="recentContent">
+                <div class="spinner"></div>
+            </div>
+        </section>
+    </div>
+    
+    <!-- Bottom Navigation -->
+    <nav class="bottom-nav">
+        <ul>
+            <li>
+                <a href="index.html" class="active">
+                    <i class="bi bi-house-fill"></i>
+                    <span>Home</span>
+                </a>
+            </li>
+            <li>
+                <a href="library.html">
+                    <i class="bi bi-book"></i>
+                    <span>Library</span>
+                </a>
+            </li>
+            <li>
+                <a href="events.html">
+                    <i class="bi bi-calendar-event"></i>
+                    <span>Events</span>
+                </a>
+            </li>
+            <li>
+                <a href="guild.html">
+                    <i class="bi bi-people"></i>
+                    <span>Guild</span>
+                </a>
+            </li>
+            <li>
+                <a href="join.html">
+                    <i class="bi bi-person-plus"></i>
+                    <span>Join</span>
+                </a>
+            </li>
+        </ul>
+    </nav>
+    
+    <!-- Scripts -->
+    <script src="js/storage.js"></script>
+    <script src="js/app.js"></script>
+    <script src="js/navigation.js"></script>
+    
+    <script>
+        // Load recent content
+        async function loadRecentContent() {
+            try {
+                const [storiesRes, poemsRes] = await Promise.all([
+                    fetch('/data/stories.json'),
+                    fetch('/data/poems.json')
+                ]);
+                
+                const stories = await storiesRes.json();
+                const poems = await poemsRes.json();
+                
+                const recent = [...stories.slice(0, 2), ...poems.slice(0, 2)]
+                    .sort(() => Math.random() - 0.5)
+                    .slice(0, 3);
+                
+                const container = document.getElementById('recentContent');
+                container.innerHTML = recent.map(item => {
+                    const isStory = item.hasOwnProperty('genre');
+                    const type = isStory ? 'story' : 'poem';
+                    return `
+                        <div class="story-card stagger-1" onclick="window.location.href='reader.html?type=${type}&id=${item.id}'">
+                            <div class="card-header">
+                                <span class="genre-tag">${isStory ? item.genre : item.theme}</span>
+                                <h3>${item.title}</h3>
+                                <div class="meta">
+                                    <span><i class="bi bi-person"></i> ${isStory ? item.author : item.poet}</span>
+                                    <span><i class="bi bi-${isStory ? 'book' : 'flower1'}"></i> ${isStory ? 'Story' : 'Poem'}</span>
+                                </div>
+                            </div>
+                            <div class="card-footer">
+                                <span class="read-time">${isStory ? item.readTime : '2 min read'}</span>
+                                <span class="read-btn">Read <i class="bi bi-arrow-right"></i></span>
+                            </div>
+                        </div>
+                    `;
+                }).join('');
+            } catch (error) {
+                console.error('Error loading recent content:', error);
+                document.getElementById('recentContent').innerHTML = `
+                    <div class="empty-state">
+                        <i class="bi bi-wifi-off"></i>
+                        <h3>Unable to load content</h3>
+                        <p>Check your connection and try again</p>
+                    </div>
+                `;
+            }
+        }
+        
+        loadRecentContent();
+    </script>
+</body>
+</html>

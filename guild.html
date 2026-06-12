@@ -1,0 +1,451 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="theme-color" content="#233D84">
+    <meta name="description" content="Learn about the MUST Writers Guild - our mission, leadership, members, and constitution.">
+    <title>Guild — MUST Writers Guild</title>
+    
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/components.css">
+    <link rel="stylesheet" href="css/animations.css">
+    
+    <link rel="manifest" href="manifest.json">
+    <link rel="apple-touch-icon" href="assets/logo.png">
+    
+    <style>
+        .guild-page {
+            padding-bottom: 120px;
+        }
+        
+        .section-header {
+            text-align: center;
+            margin-bottom: 24px;
+        }
+        
+        .section-header h2 {
+            color: var(--primary-blue);
+            font-size: 1.5rem;
+        }
+        
+        .section-header p {
+            color: var(--text-muted);
+            font-size: 0.9rem;
+        }
+        
+        .mission-card {
+            background: linear-gradient(135deg, var(--primary-blue), var(--deep-navy));
+            color: white;
+            padding: 28px;
+            border-radius: var(--radius-lg);
+            margin-bottom: 16px;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .mission-card::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -30%;
+            width: 200px;
+            height: 200px;
+            background: rgba(255,255,255,0.05);
+            border-radius: 50%;
+        }
+        
+        .mission-card h3 {
+            color: white;
+            font-size: 1.2rem;
+            margin-bottom: 12px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .mission-card h3 i {
+            color: var(--guild-green);
+        }
+        
+        .mission-card p {
+            color: rgba(255,255,255,0.9);
+            font-size: 0.95rem;
+            line-height: 1.7;
+        }
+        
+        .values-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 12px;
+        }
+        
+        .value-item {
+            background: var(--white);
+            padding: 20px;
+            border-radius: var(--radius-md);
+            text-align: center;
+            box-shadow: var(--shadow-soft);
+            border: 1px solid var(--border-light);
+        }
+        
+        .value-item i {
+            font-size: 1.8rem;
+            color: var(--guild-green);
+            margin-bottom: 10px;
+            display: block;
+        }
+        
+        .value-item h4 {
+            font-size: 0.95rem;
+            margin-bottom: 6px;
+        }
+        
+        .value-item p {
+            font-size: 0.8rem;
+            line-height: 1.5;
+        }
+        
+        .leadership-grid {
+            display: grid;
+            gap: 16px;
+        }
+        
+        .members-list {
+            margin-top: 16px;
+        }
+        
+        .constitution-intro {
+            text-align: center;
+            padding: 20px;
+            margin-bottom: 16px;
+        }
+        
+        .constitution-intro i {
+            font-size: 3rem;
+            color: var(--primary-blue);
+            margin-bottom: 12px;
+        }
+        
+        .constitution-intro h3 {
+            color: var(--text-dark);
+            margin-bottom: 8px;
+        }
+    </style>
+</head>
+<body class="guild-page page-transition">
+    <button class="dark-mode-toggle" id="darkModeToggle" aria-label="Toggle dark mode">
+        <i class="bi bi-moon-fill"></i>
+    </button>
+    
+    <div class="container">
+        <div class="page-header">
+            <h1>The Guild</h1>
+            <p>Our story, our people, our principles</p>
+        </div>
+        
+        <!-- Section Indicators -->
+        <div class="section-indicators" id="sectionIndicators">
+            <div class="dot active" data-section="0"></div>
+            <div class="dot" data-section="1"></div>
+            <div class="dot" data-section="2"></div>
+            <div class="dot" data-section="3"></div>
+        </div>
+    </div>
+    
+    <!-- Swipe Container -->
+    <div class="swipe-container" id="swipeContainer">
+        
+        <!-- Section 1: Who We Are -->
+        <section class="swipe-section" id="section-who">
+            <div class="container">
+                <div class="section-header">
+                    <h2>Who We Are</h2>
+                    <p>Our mission, vision, and values</p>
+                </div>
+                
+                <div class="mission-card">
+                    <h3><i class="bi bi-bullseye"></i> Mission</h3>
+                    <p>To nurture creative writing talent at Malawi University of Science and Technology by providing a supportive community where writers can develop their craft, share their work, and inspire others through the power of storytelling.</p>
+                </div>
+                
+                <div class="mission-card" style="background: linear-gradient(135deg, var(--guild-green), #3a7a30);">
+                    <h3><i class="bi bi-eye"></i> Vision</h3>
+                    <p>To become the premier literary community in Malawi's higher education landscape, producing published authors, award-winning poets, and influential voices that shape our national narrative.</p>
+                </div>
+                
+                <div class="section-header" style="margin-top: 24px;">
+                    <h2>Our Values</h2>
+                </div>
+                
+                <div class="values-grid">
+                    <div class="value-item">
+                        <i class="bi bi-heart-fill"></i>
+                        <h4>Creativity</h4>
+                        <p>Embracing original thought and artistic expression</p>
+                    </div>
+                    <div class="value-item">
+                        <i class="bi bi-shield-check"></i>
+                        <h4>Integrity</h4>
+                        <p>Honest storytelling and ethical writing practices</p>
+                    </div>
+                    <div class="value-item">
+                        <i class="bi bi-people-fill"></i>
+                        <h4>Community</h4>
+                        <p>Supporting each other's growth and success</p>
+                    </div>
+                    <div class="value-item">
+                        <i class="bi bi-lightbulb-fill"></i>
+                        <h4>Innovation</h4>
+                        <p>Exploring new forms and digital storytelling</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Section 2: Leadership -->
+        <section class="swipe-section" id="section-leadership">
+            <div class="container">
+                <div class="section-header">
+                    <h2>Leadership</h2>
+                    <p>Guiding the guild forward</p>
+                </div>
+                
+                <div class="leadership-grid" id="leadershipGrid">
+                    <div class="leadership-card">
+                        <div class="photo-placeholder">
+                            <i class="bi bi-person-fill"></i>
+                        </div>
+                        <h4>Sekani Msachi</h4>
+                        <p class="position">Chairperson</p>
+                        <p class="quote">Provides overall leadership and direction, chairs meetings and represents the Guild in official matters, ensures the Guild is registered with respective university bodies and complies with all policies.</p>
+                    </div>
+                    
+                    <div class="leadership-card">
+                        <div class="photo-placeholder" style="background: linear-gradient(135deg, var(--guild-green), #3a7a30);">
+                            <i class="bi bi-person-fill"></i>
+                        </div>
+                        <h4>Racheal Makowa</h4>
+                        <p class="position">Vice Chairperson</p>
+                        <p class="quote">Assists the Chairperson and acts in their absence, oversees membership recruitment, retention, and internal affairs, including monitoring active participation.</p>
+                    </div>
+                    
+                    <div class="leadership-card">
+                        <div class="photo-placeholder" style="background: linear-gradient(135deg, #8B5CF6, #6D28D9);">
+                            <i class="bi bi-person-fill"></i>
+                        </div>
+                        <h4>Success Omoregie</h4>
+                        <p class="position">Publicity and Events Coordinator</p>
+                        <p class="quote">Promotes the Guild through social media, announcements, and campus outreach to strengthen visibility, plans and organizes workshops, readings, competitions, and fun social events (e.g., writing jams, themed nights) to enhance engagement.</p>
+                    </div>
+                    
+                    <div class="leadership-card">
+                        <div class="photo-placeholder" style="background: linear-gradient(135deg, #F59E0B, #D97706);">
+                            <i class="bi bi-person-fill"></i>
+                        </div>
+                        <h4>Daneil Mwitha</h4>
+                        <p class="position">Secretary</p>
+                        <p class="quote">Maintains records, minutes of meetings, and all communications, manages membership databases and application processes.</p>
+                    </div>
+                    
+                    <div class="leadership-card">
+                        <div class="photo-placeholder" style="background: linear-gradient(135deg, #EC4899, #BE185D);">
+                            <i class="bi bi-person-fill"></i>
+                        </div>
+                        <h4>Desire Kabota</h4>
+                        <p class="position">Treasurer</p>
+                        <p class="quote">Manages finances, keeps accurate records, and prepares financial reports, oversees fundraising efforts and budget allocation for engaging events.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Section 3: Members -->
+        <section class="swipe-section" id="section-members">
+            <div class="container">
+                <div class="section-header">
+                    <h2>Members</h2>
+                    <p>Our talented community</p>
+                </div>
+                
+                <div class="search-bar">
+                    <i class="bi bi-search"></i>
+                    <input type="text" id="memberSearch" placeholder="Search members by name or genre...">
+                </div>
+                
+                <div class="members-list" id="membersList">
+                    <div class="spinner"></div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Section 4: Constitution -->
+        <section class="swipe-section" id="section-constitution">
+            <div class="container">
+                <div class="constitution-intro">
+                    <i class="bi bi-file-text-fill"></i>
+                    <h3>Guild Constitution</h3>
+                    <p>The governing document of the MUST Writers Guild</p>
+                </div>
+                
+                <div id="constitutionAccordion">
+                    <div class="spinner"></div>
+                </div>
+            </div>
+        </section>
+    </div>
+    
+    <!-- Swipe Hint -->
+    <div class="swipe-hint" id="swipeHint">
+        <i class="bi bi-arrow-right"></i>
+        <span>Swipe</span>
+    </div>
+    
+    <!-- Bottom Navigation -->
+    <nav class="bottom-nav">
+        <ul>
+            <li>
+                <a href="index.html">
+                    <i class="bi bi-house"></i>
+                    <span>Home</span>
+                </a>
+            </li>
+            <li>
+                <a href="library.html">
+                    <i class="bi bi-book"></i>
+                    <span>Library</span>
+                </a>
+            </li>
+            <li>
+                <a href="events.html">
+                    <i class="bi bi-calendar-event"></i>
+                    <span>Events</span>
+                </a>
+            </li>
+            <li>
+                <a href="guild.html" class="active">
+                    <i class="bi bi-people-fill"></i>
+                    <span>Guild</span>
+                </a>
+            </li>
+            <li>
+                <a href="join.html">
+                    <i class="bi bi-person-plus"></i>
+                    <span>Join</span>
+                </a>
+            </li>
+        </ul>
+    </nav>
+    
+    <!-- Scripts -->
+    <script src="js/storage.js"></script>
+    <script src="js/app.js"></script>
+    <script src="js/navigation.js"></script>
+    <script src="js/swipe.js"></script>
+    <script src="js/search.js"></script>
+    
+    <script>
+        // Load members from JSON
+        async function loadMembers() {
+            try {
+                const response = await fetch('/data/members.json');
+                const members = await response.json();
+                
+                const container = document.getElementById('membersList');
+                renderMembers(members, container);
+                
+                // Setup search
+                document.getElementById('memberSearch').addEventListener('input', (e) => {
+                    const filtered = members.filter(m => 
+                        m.name.toLowerCase().includes(e.target.value.toLowerCase()) ||
+                        m.genres.some(g => g.toLowerCase().includes(e.target.value.toLowerCase()))
+                    );
+                    renderMembers(filtered, container);
+                });
+            } catch (error) {
+                console.error('Error loading members:', error);
+                document.getElementById('membersList').innerHTML = `
+                    <div class="empty-state">
+                        <i class="bi bi-wifi-off"></i>
+                        <h3>Unable to load members</h3>
+                    </div>
+                `;
+            }
+        }
+        
+        function renderMembers(members, container) {
+            if (members.length === 0) {
+                container.innerHTML = `
+                    <div class="empty-state">
+                        <i class="bi bi-search"></i>
+                        <h3>No members found</h3>
+                    </div>
+                `;
+                return;
+            }
+            
+            container.innerHTML = members.map(member => `
+                <div class="member-card">
+                    <div class="avatar">${member.name.split(' ').map(n => n[0]).join('')}</div>
+                    <div class="info">
+                        <h4>${member.name}</h4>
+                        <p>${member.year} • ${member.faculty}</p>
+                        <p style="margin-top: 2px; color: var(--guild-green); font-size: 0.75rem;">
+                            ${member.genres.join(', ')}
+                        </p>
+                    </div>
+                </div>
+            `).join('');
+        }
+        
+        // Load constitution from JSON
+        async function loadConstitution() {
+            try {
+                const response = await fetch('/data/constitution.json');
+                const constitution = await response.json();
+                
+                const container = document.getElementById('constitutionAccordion');
+                container.innerHTML = constitution.articles.map((article, index) => `
+                    <div class="accordion-item ${index === 0 ? 'active' : ''}">
+                        <div class="accordion-header" onclick="toggleAccordion(this)">
+                            <span>Article ${article.number}: ${article.title}</span>
+                            <i class="bi bi-chevron-down"></i>
+                        </div>
+                        <div class="accordion-body">
+                            <div class="accordion-content">
+                                ${article.content.map(p => `<p style="margin-bottom: 12px;">${p}</p>`).join('')}
+                            </div>
+                        </div>
+                    </div>
+                `).join('');
+            } catch (error) {
+                console.error('Error loading constitution:', error);
+                document.getElementById('constitutionAccordion').innerHTML = `
+                    <div class="empty-state">
+                        <i class="bi bi-wifi-off"></i>
+                        <h3>Unable to load constitution</h3>
+                    </div>
+                `;
+            }
+        }
+        
+        function toggleAccordion(header) {
+            const item = header.parentElement;
+            const wasActive = item.classList.contains('active');
+            
+            // Close all
+            document.querySelectorAll('.accordion-item').forEach(i => i.classList.remove('active'));
+            
+            // Open clicked if wasn't active
+            if (!wasActive) {
+                item.classList.add('active');
+            }
+        }
+        
+        // Initialize
+        loadMembers();
+        loadConstitution();
+    </script>
+</body>
+</html>

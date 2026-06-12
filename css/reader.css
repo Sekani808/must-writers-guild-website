@@ -1,0 +1,194 @@
+/* ============================================
+   MUST Writers Guild — Reader Styles
+   ============================================ */
+
+.reader-page {
+    padding: 0;
+    padding-bottom: 100px;
+}
+
+.reader-header {
+    padding: 60px 20px 24px;
+    text-align: center;
+    border-bottom: 1px solid var(--border-light);
+    margin-bottom: 24px;
+}
+
+.reader-header h1 {
+    font-size: 1.5rem;
+    margin-bottom: 8px;
+    color: var(--text-dark);
+    line-height: 1.4;
+}
+
+.reader-header .author {
+    color: var(--guild-green);
+    font-weight: 600;
+    font-size: 1rem;
+}
+
+.reader-header .meta {
+    display: flex;
+    justify-content: center;
+    gap: 16px;
+    margin-top: 12px;
+    font-size: 0.85rem;
+    color: var(--text-muted);
+}
+
+.reader-content {
+    max-width: 680px;
+    margin: 0 auto;
+    padding: 0 24px;
+    font-size: 1.1rem;
+    line-height: 1.8;
+    color: var(--text-dark);
+}
+
+/* Story Styles */
+.reader-content.story p {
+    margin-bottom: 1.5em;
+    text-align: justify;
+    text-indent: 1.5em;
+}
+
+.reader-content.story p:first-of-type {
+    text-indent: 0;
+}
+
+.reader-content.story p:first-of-type::first-letter {
+    font-size: 3em;
+    float: left;
+    line-height: 0.8;
+    padding-right: 8px;
+    color: var(--primary-blue);
+    font-family: Georgia, 'Times New Roman', serif;
+    font-weight: 700;
+}
+
+/* Poetry Styles */
+.reader-content.poem {
+    font-family: Georgia, 'Times New Roman', serif;
+    font-size: 1.15rem;
+    line-height: 2.2;
+    white-space: pre-wrap;
+    text-align: center;
+}
+
+.reader-content.poem .stanza {
+    margin-bottom: 2em;
+}
+
+.reader-content.poem .line {
+    display: block;
+}
+
+/* Font Size Controls */
+.font-size-small { font-size: 0.95rem; }
+.font-size-small .reader-content.story p { line-height: 1.7; }
+.font-size-small .reader-content.poem { font-size: 1rem; line-height: 2; }
+
+.font-size-medium { font-size: 1.1rem; }
+.font-size-medium .reader-content.story p { line-height: 1.8; }
+.font-size-medium .reader-content.poem { font-size: 1.15rem; line-height: 2.2; }
+
+.font-size-large { font-size: 1.25rem; }
+.font-size-large .reader-content.story p { line-height: 1.9; }
+.font-size-large .reader-content.poem { font-size: 1.3rem; line-height: 2.4; }
+
+/* Dark Mode Reader */
+[data-theme="dark"] .reader-header {
+    border-color: var(--border-light);
+}
+
+[data-theme="dark"] .reader-content.story p:first-of-type::first-letter {
+    color: var(--guild-green);
+}
+
+/* Reader Scrollbar */
+.reader-content::-webkit-scrollbar {
+    width: 8px;
+}
+
+.reader-content::-webkit-scrollbar-thumb {
+    background: var(--border-light);
+    border-radius: 4px;
+}
+
+/* Selection in Reader */
+.reader-content::selection {
+    background: var(--guild-green);
+    color: white;
+}
+
+/* Focus Mode */
+.focus-mode .reader-header,
+.focus-mode .reader-controls,
+.focus-mode .bookmark-btn,
+.focus-mode .back-btn,
+.focus-mode .dark-mode-toggle {
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.3s ease;
+}
+
+.focus-mode:hover .reader-header,
+.focus-mode:hover .reader-controls,
+.focus-mode:hover .bookmark-btn,
+.focus-mode:hover .back-btn,
+.focus-mode:hover .dark-mode-toggle {
+    opacity: 1;
+    pointer-events: auto;
+}
+
+/* Reading Time Estimate */
+.reading-time-estimate {
+    text-align: center;
+    padding: 16px;
+    color: var(--text-muted);
+    font-size: 0.85rem;
+    border-top: 1px solid var(--border-light);
+    margin-top: 32px;
+}
+
+/* Chapter/Part Dividers */
+.divider {
+    text-align: center;
+    margin: 2em 0;
+    color: var(--text-muted);
+    font-size: 1.2rem;
+    letter-spacing: 8px;
+}
+
+/* Poetry Specific Enhancements */
+.poem-title {
+    font-family: Georgia, 'Times New Roman', serif;
+    font-size: 1.8rem;
+    text-align: center;
+    margin-bottom: 8px;
+    color: var(--text-dark);
+}
+
+.poem-dedication {
+    text-align: center;
+    font-style: italic;
+    color: var(--text-muted);
+    margin-bottom: 2em;
+    font-size: 0.95rem;
+}
+
+/* End of Content Marker */
+.end-marker {
+    text-align: center;
+    margin: 3em 0;
+    color: var(--text-muted);
+    font-size: 0.9rem;
+    letter-spacing: 4px;
+}
+
+.end-marker::before,
+.end-marker::after {
+    content: '—';
+    margin: 0 12px;
+    color: var(--border-light);
+}

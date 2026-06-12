@@ -1,0 +1,103 @@
+{
+    "name": "MUST Writers Guild",
+    "short_name": "MUST Writers",
+    "description": "A digital home for the Malawi University of Science and Technology writing community. Discover stories, share your voice, and grow as a writer.",
+    "start_url": "/index.html",
+    "display": "standalone",
+    "background_color": "#F8F9FC",
+    "theme_color": "#233D84",
+    "orientation": "portrait",
+    "icons": [
+        {
+            "src": "assets/logo.png",
+            "sizes": "72x72",
+            "type": "image/png",
+            "purpose": "any"
+        },
+        {
+            "src": "assets/logo.png",
+            "sizes": "96x96",
+            "type": "image/png",
+            "purpose": "any"
+        },
+        {
+            "src": "assets/logo.png",
+            "sizes": "128x128",
+            "type": "image/png",
+            "purpose": "any"
+        },
+        {
+            "src": "assets/logo.png",
+            "sizes": "144x144",
+            "type": "image/png",
+            "purpose": "any"
+        },
+        {
+            "src": "assets/logo.png",
+            "sizes": "152x152",
+            "type": "image/png",
+            "purpose": "any"
+        },
+        {
+            "src": "assets/logo.png",
+            "sizes": "192x192",
+            "type": "image/png",
+            "purpose": "any"
+        },
+        {
+            "src": "assets/logo.png",
+            "sizes": "384x384",
+            "type": "image/png",
+            "purpose": "any"
+        },
+        {
+            "src": "assets/logo.png",
+            "sizes": "512x512",
+            "type": "image/png",
+            "purpose": "any"
+        }
+    ],
+    "categories": ["education", "books", "lifestyle"],
+    "lang": "en",
+    "dir": "ltr",
+    "scope": "/",
+    "screenshots": [
+        {
+            "src": "assets/screenshots/home.png",
+            "sizes": "390x844",
+            "type": "image/png",
+            "form_factor": "narrow",
+            "label": "Home screen of MUST Writers Guild"
+        },
+        {
+            "src": "assets/screenshots/library.png",
+            "sizes": "390x844",
+            "type": "image/png",
+            "form_factor": "narrow",
+            "label": "Library page showing stories and poetry"
+        }
+    ],
+    "shortcuts": [
+        {
+            "name": "Library",
+            "short_name": "Library",
+            "description": "Browse stories and poetry",
+            "url": "/library.html",
+            "icons": [{ "src": "assets/logo.png", "sizes": "96x96" }]
+        },
+        {
+            "name": "Events",
+            "short_name": "Events",
+            "description": "View upcoming events",
+            "url": "/events.html",
+            "icons": [{ "src": "assets/logo.png", "sizes": "96x96" }]
+        },
+        {
+            "name": "Join",
+            "short_name": "Join",
+            "description": "Apply to join the guild",
+            "url": "/join.html",
+            "icons": [{ "src": "assets/logo.png", "sizes": "96x96" }]
+        }
+    ]
+}
